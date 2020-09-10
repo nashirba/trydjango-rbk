@@ -13,7 +13,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 
 DEBUG = env.bool('DEBUG')
 
-ALLOWED_HOSTS = ['trydjango-nurlan.herokuapp.com', '0.0.0.0']
+ALLOWED_HOSTS = ['trydjango-nurlan.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
