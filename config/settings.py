@@ -15,6 +15,8 @@ DEBUG = env.bool('DEBUG')
 
 ALLOWED_HOSTS = ['trydjango-nurlan.herokuapp.com', '127.0.0.1']
 
+# Unsplash Access Key using environ
+UNSPLASH_ACCESS_KEY = env.str('ACCESS_KEY')
 
 # Application definition
 
