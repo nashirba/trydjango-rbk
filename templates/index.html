@@ -3,6 +3,15 @@
 {% block content %}
     <h1>Welcome to my first django app</h1>
     
+    <div class="container">
+      <form action="/search/photos" method='GET'>
+        <label for="fname">Search photo:</label>
+        <input type="text" size=80 name="query"><br><br>
+        <input type="submit" value="Submit">
+      </form> 
+    </div>
+
+    <hr class="mt-2 mb-5"> 
 
     <div class="container">
     
