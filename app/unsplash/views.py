@@ -18,35 +18,35 @@ def get_photos():
 
     return request_content
 
-# delete this function later after creating form for search photo
-# def search_photo():
-#     url = f'{BASE_URL}search/photos'
-#     params = {
-#         'query':'#',
-#         'client_id':settings.UNSPLASH_ACCESS_KEY
-#     }
-#     request_content = requests.get(url, params=params)
-#     request_content = request_content.json()
 
-#     return request_content
+def search_photo(search_data):
+    url = f'{BASE_URL}search/photos'
+    params = {
+        'query':search_data,
+        'client_id':settings.UNSPLASH_ACCESS_KEY
+    }
+    request_content = requests.get(url, params=params)
+    request_content = request_content.json()
+
+    return request_content
 
 
 def index_view(request):
+    search_form = SearchPhoto()
+    if request.method == 'GET':
+        search_form = SearchPhoto(request.GET)
     request_json = get_photos()
-    return render(request, 'index.html', {'request_json': request_json})
+    context = {
+        'request_json': request_json,
+        'search_form': search_form
+    }
+    return render(request, 'index.html', context)
 
 
 def search_view(request):
-    if request.method == 'GET':
-        search_form = SearchPhoto()
-        print('----------------------------')
-        print(search_form)
-        print('----------------------------')
-        url = f'{BASE_URL}search/photos'
-        params = {
-            'query':'#',
-            'client_id':settings.UNSPLASH_ACCESS_KEY
-        }
-        request_content = requests.get(url, params=params)
-        request_content = request_content.json()
-    return render(request, 'search.html', {'search_form': search_form})
+    search_value = request.GET.__getitem__('Search')
+    search_json = search_photo(search_value)
+    context = {
+        'search_json': search_json
+    }
+    return render(request, 'search.html', context)

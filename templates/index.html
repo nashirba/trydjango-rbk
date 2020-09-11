@@ -4,10 +4,8 @@
     <h1>Welcome to my first django app</h1>
     
     <div class="container">
-      <form action={% url 'search' %} method='GET'>
-        {{ form }}
-        <label for="Search photo">Search photo:</label>
-        <input type="text" size=80 name="Search photo"><br><br>
+      <form action={% url 'search' %} method='GET'> 
+        {{ search_form.as_p }}
         <input type="submit" value="Submit">
       </form> 
     </div>
