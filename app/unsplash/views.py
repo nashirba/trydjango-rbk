@@ -1,13 +1,16 @@
 import requests
 from django.shortcuts import render
+from django.conf import settings
 
+BASE_URL = 'https://api.unsplash.com/'
 
 def get_request():
-    base_url = 'https://api.unsplash.com/'
-    UNSPLASH_ACCESS_KEY = '-RbPPqlmBdwSR5Clv8dMs8oCLfrK7KvB3um-dp7-swY'
-    request_content = requests.get(
-        base_url + '/photos/random?count=10' + '&' + 'client_id=' + UNSPLASH_ACCESS_KEY
-    )
+    url = f'{BASE_URL}/photos/random'
+    params = {
+        'count':'10',
+        'client_id':settings.UNSPLASH_ACCESS_KEY
+    }
+    request_content = requests.get(url, params=params)
     request_content = request_content.json()
 
     return request_content
