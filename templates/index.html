@@ -1,17 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Here are requested random photoes</h1>
+    <h1>Welcome to my first django app</h1>
     
 
     <div class="container">
     
       {% for request_item in request_json %}
       
-        <h5 class="font-weight-light text-center text-lg-left mt-4 mb-0">
+        <h5 class="text-left text-lg-left mt-4 mb-0">
           Author : {{ request_item.user.name }}</h5>
-      
-        <hr class="mt-2 mb-5">
       
         <div class="row text-center text-lg-left">
       
@@ -20,9 +18,9 @@
                   <img class="img-fluid img-thumbnail" src="{{ request_item.urls.small }}" alt="">
                 </a>
           </div>
-          
-        </div>
 
+        </div>
+        <hr class="mt-2 mb-5">  
       {% endfor %}
 
     </div>
