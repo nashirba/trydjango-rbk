@@ -7,20 +7,23 @@
     <hr class="mt-2 mb-5"> 
 
     <div class="container">
-      {{search_json}}
+      
+      {% for search_item in search_json.results %}
+      
         <h5 class="text-left text-lg-left mt-4 mb-0">
-          Author : {{ search_json.user.name }}</h5>
+          Author : {{ search_item.user.name }}</h5>
       
         <div class="row text-center text-lg-left">
       
           <div class="col-lg-3 col-md-4 col-6">
             <a href="#" class="d-block mb-4 h-100">
-                  <img class="img-fluid img-thumbnail" src="{{ search_json.urls.small }}" alt="">
+                  <img class="img-fluid img-thumbnail" src="{{ search_item.urls.small }}" alt="">
                 </a>
           </div>
 
         </div>
         <hr class="mt-2 mb-5">  
+      {% endfor %}
 
     </div>
 
