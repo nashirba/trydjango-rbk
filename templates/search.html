@@ -1,21 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Welcome to my first django app</h1>
+    <h1>Search Results</h1>
     
-    <div class="container">
-      <form action={% url 'search' %} method='GET'>
-        <label for="fname">Search photo:</label>
-        <input type="text" size=80 name="query"><br><br>
-        <input type="submit" value="Submit">
-      </form> 
-    </div>
-
+    
     <hr class="mt-2 mb-5"> 
 
     <div class="container">
     
-      {% for request_item in request_json %}
+      <!-- {% for request_item in request_json %}
       
         <h5 class="text-left text-lg-left mt-4 mb-0">
           Author : {{ request_item.user.name }}</h5>
@@ -30,7 +23,7 @@
 
         </div>
         <hr class="mt-2 mb-5">  
-      {% endfor %}
+      {% endfor %} -->
 
     </div>
 

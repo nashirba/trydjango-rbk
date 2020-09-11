@@ -15,6 +15,11 @@ def get_request():
 
     return request_content
 
+
 def index_view(request):
     request_json = get_request()
     return render(request, 'index.html', {'request_json':request_json})
+
+
+def search_view(request):
+    return render(request, 'search.html')
