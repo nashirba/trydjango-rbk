@@ -1,14 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Hello, Nurlan!</h1>
-    {% for request_item in request_json %}
-        {{request_item}}
-    {% endfor %}
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Here are requested random photoes</h1>
+    
+
+    <div class="container">
+    
+      {% for request_item in request_json %}
+
+        <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Thumbnail Gallery</h1>
+      
+        <hr class="mt-2 mb-5">
+      
+        <div class="row text-center text-lg-left">
+      
+          <div class="col-lg-3 col-md-4 col-6">
+            <a href="#" class="d-block mb-4 h-100">
+                  <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/pWkk7iiCoDM/400x300" alt="">
+                </a>
+          </div>
+          
+        </div>
+
+      {% endfor %}
+
+      </div>
+
+{% end content %}
