@@ -30,8 +30,11 @@ def search_photo(search_data):
 
 
 def detail_photo(id_photo):
-    url = f'{BASE_URL}/photos/:{id_photo}'
-    request_content = requests.get(url)
+    url = f'{BASE_URL}/photos/{id_photo}'
+    params = {
+        'client_id':settings.UNSPLASH_ACCESS_KEY
+    }
+    request_content = requests.get(url, params=params)
     request_content = request_content.json()
     return request_content
 
@@ -63,3 +66,4 @@ def detail_view(request, id):
         'detail_json': detail_json
     }
     return render(request, 'detail.html', context)
+    

@@ -2,29 +2,30 @@
 
 {% block content %}
     <h1>Photo Detail</h1>
-    
-    
+        
     <hr class="mt-2 mb-5"> 
 
     <div class="container">
-      
-      <!-- {% for search_item in search_json.results %}
-      
+
         <h5 class="text-left text-lg-left mt-4 mb-0">
-          Author : {{ search_item.user.name }}</h5>
+          Author : {{ detail_json.user.name }}</h5>
+        <h5 class="text-left text-lg-left mt-4 mb-0">
+          Date created : {{ detail_json.created_at }}</h5>
+        <h5 class="text-left text-lg-left mt-4 mb-0">
+          Description : {{ detail_json.description }}</h5>
+        <h5 class="text-left text-lg-left mt-4 mb-0">
+          Likes : {{ detail_json.likes }}</h5>
       
         <div class="row text-center text-lg-left">
       
-          <div class="col-lg-3 col-md-4 col-6">
+          <div class="#">
             <a href="#" class="d-block mb-4 h-100">
-                  <img class="img-fluid img-thumbnail" src="{{ search_item.urls.small }}" alt="">
-                </a>
+              <img class="img-fluid img-thumbnail" src="{{ detail_json.urls.full }}" alt="">
+            </a>
           </div>
 
         </div>
         <hr class="mt-2 mb-5">  
-      {% endfor %} -->
-
     </div>
 
 {% endblock content %}
