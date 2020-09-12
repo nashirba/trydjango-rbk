@@ -15,7 +15,6 @@ def get_photos():
     }
     request_content = requests.get(url, params=params)
     request_content = request_content.json()
-
     return request_content
 
 
@@ -27,7 +26,13 @@ def search_photo(search_data):
     }
     request_content = requests.get(url, params=params)
     request_content = request_content.json()
+    return request_content
 
+
+def detail_photo(id_photo):
+    url = f'{BASE_URL}/photos/:{id_photo}'
+    request_content = requests.get(url)
+    request_content = request_content.json()
     return request_content
 
 
@@ -53,11 +58,8 @@ def search_view(request):
 
 
 def detail_view(request, id):
-    print('-----------------------------')
-    print(request.content_params)
-    print(id)
-    print('-----------------------------')
+    detail_json = detail_photo(id)
     context = {
-        
+        'detail_json': detail_json
     }
     return render(request, 'detail.html', context)
