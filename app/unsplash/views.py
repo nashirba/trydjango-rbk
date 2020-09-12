@@ -50,3 +50,14 @@ def search_view(request):
         'search_json': search_json
     }
     return render(request, 'search.html', context)
+
+
+def detail_view(request, id):
+    print('-----------------------------')
+    print(request.content_params)
+    print(id)
+    print('-----------------------------')
+    context = {
+        
+    }
+    return render(request, 'detail.html', context)
