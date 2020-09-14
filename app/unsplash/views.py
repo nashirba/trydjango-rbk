@@ -7,63 +7,62 @@ from .forms import SearchPhoto
 BASE_URL = 'https://api.unsplash.com/'
 
 
-def get_photos():
+def get_photos_url():
     url = f'{BASE_URL}/photos/random'
     params = {
         'count':'10',
         'client_id':settings.UNSPLASH_ACCESS_KEY
     }
-    request_content = requests.get(url, params=params)
-    request_content = request_content.json()
-    return request_content
+    response = requests.get(url, params=params)
+    response = response.json()
+    return response
 
 
-def search_photo(search_data):
+def search_photo_url(search_data):
     url = f'{BASE_URL}search/photos'
     params = {
         'query':search_data,
         'client_id':settings.UNSPLASH_ACCESS_KEY
     }
-    request_content = requests.get(url, params=params)
-    request_content = request_content.json()
-    return request_content
+    response = requests.get(url, params=params)
+    response = response.json()
+    return response
 
 
-def detail_photo(id_photo):
+def detail_photo_url(id_photo):
     url = f'{BASE_URL}/photos/{id_photo}'
     params = {
         'client_id':settings.UNSPLASH_ACCESS_KEY
     }
-    request_content = requests.get(url, params=params)
-    request_content = request_content.json()
-    return request_content
+    response = requests.get(url, params=params)
+    response = response.json()
+    return response
 
 
 def index_view(request):
     search_form = SearchPhoto()
     if request.method == 'GET':
         search_form = SearchPhoto(request.GET)
-    request_json = get_photos()
+    response = get_photos_url()
     context = {
-        'request_json': request_json,
+        'response': response,
         'search_form': search_form
     }
     return render(request, 'index.html', context)
 
 
 def search_view(request):
-    search_value = request.GET.__getitem__('Search')
-    search_json = search_photo(search_value)
+    search_value = request.GET. get('query', None)
+    response = search_photo_url(search_value)
     context = {
-        'search_json': search_json
+        'response': response
     }
     return render(request, 'search.html', context)
 
 
 def detail_view(request, id):
-    detail_json = detail_photo(id)
+    response = detail_photo_url(id)
     context = {
-        'detail_json': detail_json
+        'response': response
     }
     return render(request, 'detail.html', context)
-    

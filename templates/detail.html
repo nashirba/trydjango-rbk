@@ -8,19 +8,19 @@
     <div class="container">
 
         <h5 class="text-left text-lg-left mt-4 mb-0">
-          Author : {{ detail_json.user.name }}</h5>
+          Author : {{ response.user.name }}</h5>
         <h5 class="text-left text-lg-left mt-4 mb-0">
-          Date created : {{ detail_json.created_at }}</h5>
+          Date created : {{ response.created_at }}</h5>
         <h5 class="text-left text-lg-left mt-4 mb-0">
-          Description : {{ detail_json.description }}</h5>
+          Description : {{ response.description }}</h5>
         <h5 class="text-left text-lg-left mt-4 mb-0">
-          Likes : {{ detail_json.likes }}</h5>
+          Likes : {{ response.likes }}</h5>
       
         <div class="row text-center text-lg-left">
       
           <div class="#">
             <a href="#" class="d-block mb-4 h-100">
-              <img class="img-fluid img-thumbnail" src="{{ detail_json.urls.full }}" alt="">
+              <img class="img-fluid img-thumbnail" src="{{ response.urls.full }}" alt="">
             </a>
           </div>
 

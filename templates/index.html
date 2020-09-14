@@ -14,16 +14,16 @@
 
     <div class="container">
     
-      {% for request_item in request_json %}
+      {% for response_item in response %}
       
         <h5 class="text-left text-lg-left mt-4 mb-0">
-          Author : {{ request_item.user.name }}</h5>
+          Author : {{ response_item.user.name }}</h5>
       
         <div class="row text-center text-lg-left">
       
           <div class="col-lg-3 col-md-4 col-6">
-            <a href="{% url 'detail' request_item.id %}" class="d-block mb-4 h-100">
-                  <img class="img-fluid img-thumbnail" src="{{ request_item.urls.small }}" alt="">
+            <a href="{% url 'detail' response_item.id %}" class="d-block mb-4 h-100">
+                  <img class="img-fluid img-thumbnail" src="{{ response_item.urls.small }}" alt="">
                 </a>
           </div>
 
