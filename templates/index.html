@@ -9,28 +9,24 @@
         <input type="submit" value="Submit">
       </form> 
     </div>
-
     <hr class="mt-2 mb-5"> 
 
     <div class="container">
-    
+      <div class="row text-center text-lg-left">
+
       {% for response_item in response %}
-      
-        <h5 class="text-left text-lg-left mt-4 mb-0">
-          Author : {{ response_item.user.name }}</h5>
-      
-        <div class="row text-center text-lg-left">
-      
-          <div class="col-lg-3 col-md-4 col-6">
-            <a href="{% url 'detail' response_item.id %}" class="d-block mb-4 h-100">
-                  <img class="img-fluid img-thumbnail" src="{{ response_item.urls.small }}" alt="">
-                </a>
-          </div>
 
+        <div class="col-lg-3 col-md-4 col-6">
+          Author : {{ response_item.user.name }}
+          <a href="{% url 'detail' response_item.id %}" class="d-block mb-4 h-100">
+            <img class="img-fluid img-thumbnail" src="{{ response_item.urls.small }}" alt="">
+          </a>
         </div>
-        <hr class="mt-2 mb-5">  
+        <hr class="mt-2 mb-5"> 
+      
       {% endfor %}
-
+      
+      </div> 
     </div>
 
 {% endblock content %}
