@@ -22,7 +22,8 @@ def search_photo_url(search_data):
     url = f'{BASE_URL}search/photos'
     params = {
         'query':search_data,
-        'client_id':settings.UNSPLASH_ACCESS_KEY
+        'client_id':settings.UNSPLASH_ACCESS_KEY,
+        'per_page' : 12
     }
     response = requests.get(url, params=params)
     response = response.json()
