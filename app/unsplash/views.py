@@ -10,7 +10,7 @@ BASE_URL = 'https://api.unsplash.com/'
 def get_photos_url():
     url = f'{BASE_URL}/photos/random'
     params = {
-        'count':'10',
+        'count':'12',
         'client_id':settings.UNSPLASH_ACCESS_KEY
     }
     response = requests.get(url, params=params)
@@ -52,10 +52,19 @@ def index_view(request):
 
 
 def search_view(request):
-    search_value = request.GET. get('query', None)
+
+    search_form = SearchPhoto()
+    if request.method == 'GET':
+        search_form = SearchPhoto(request.GET)
+    else:
+        search_form = ''
+    response = get_photos_url()
+
+    search_value = request.GET.get('query', None)
     response = search_photo_url(search_value)
     context = {
-        'response': response
+        'response': response,
+        'search_form': search_form
     }
     return render(request, 'search.html', context)
 

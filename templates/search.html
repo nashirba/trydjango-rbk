@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Search Results</h1>
-    
-    
-    <hr class="mt-2 mb-5"> 
+
+<nav class="navbar navbar-light bg-light">
+  <div class="container">
+    <form action={% url 'search' %} method='GET'> 
+      {{ search_form.as_p }}
+      <input type="submit" value="Submit" class="btn btn-outline-success my-2 my-sm-0">
+    </form> 
+  </div>
+</nav> <br>
 
     <div class="container">
       <div class="row text-center text-lg-left">
