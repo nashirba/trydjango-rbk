@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+
     <h1>Registration Page</h1>
     <div class='col-md-8'>
         <div class='content-section'> 
@@ -16,7 +17,7 @@
             </form>
             <div class='border-top pt-3'>
                 <small class='text muted'>
-                    Already have an account? <a class='ml-2' href="#">Sign In</a>
+                    Already have an account? <a class='ml-2' href="{% url 'login' %}">Sign In</a>
                 </small>
                 <br><br><br>
             </div>
