@@ -114,3 +114,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # after login redirect to index.html rather than accounts/profile.hrml
 LOGIN_REDIRECT_URL = 'index'
+# rather than /accounts/login/
+LOGIN_URL = 'login'
