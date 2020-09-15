@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
+from app.unsplash.models import Photo
 
 
 def register(request):
@@ -18,4 +19,5 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    context = {'photos': Photo.objects.all()}
+    return render(request, 'users/profile.html', context)
