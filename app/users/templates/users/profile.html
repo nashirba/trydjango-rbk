@@ -10,10 +10,9 @@
         {% for photo in photos %}
   
           <div class="col-lg-3 col-md-4 col-6">
-            Author : {{ photo.author }}
-            <a href="#" class="d-block mb-4 h-100">
-              <img class="img-fluid img-thumbnail" src="{{ photo.image }}" alt="">
-            </a>
+            Author : {{ photo.author }} <br>
+            Decription: {{ photo.description }} <br>
+            <img class="img-fluid img-thumbnail" src="{{ photo.image }}" alt="">
           </div>
           <hr class="mt-2 mb-5"> 
         

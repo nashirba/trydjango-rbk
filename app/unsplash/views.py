@@ -46,6 +46,7 @@ def save_photo(response, request):
     if request.user.is_authenticated:
         author = response['user']['name']
         image = response['urls']['small']
+        photo_unsplash_id = response['id']
         if response['description']:
             description = response['description']
         else:
@@ -53,9 +54,11 @@ def save_photo(response, request):
         photo_data = {
             'author': author,
             'image': image,
-            'description': description
+            'description': description,
+            'photo_unsplash_id': photo_unsplash_id
         }
         photo_object= Photo.objects.create(**photo_data)
+        photo_object.users.add(request.user)
         return messages.success(request, f'Photo is saved!')
     else:
         return messages.warning(request, f'You must be logged in to save!')
@@ -65,6 +68,9 @@ def index_view(request):
     search_form = SearchPhoto()
     if request.method == 'GET':
         search_form = SearchPhoto(request.GET)
+    if request.method == 'POST': # save button
+        response = response[photo_number]
+        save_photo(response, request)
     response = get_photos_url()
     context = {
         'response': response,
@@ -74,7 +80,6 @@ def index_view(request):
 
 
 def search_view(request):
-
     search_form = SearchPhoto()
     if request.method == 'GET':
         search_form = SearchPhoto(request.GET)
