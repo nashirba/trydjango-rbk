@@ -1,6 +1,7 @@
 import requests
-from django.shortcuts import render
 from django.conf import settings
+from django.contrib import messages
+from django.shortcuts import render
 from .forms import SearchPhoto
 from .models import Photo
 
@@ -90,4 +91,6 @@ def detail_view(request, id):
                 'description': description
             }
             photo_object= Photo.objects.create(**photo_data)
+        else:
+            messages.warning(request, f'You must be logged in to save!')
     return render(request, 'detail.html', context)
