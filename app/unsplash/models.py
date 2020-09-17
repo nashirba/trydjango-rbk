@@ -9,5 +9,8 @@ class Photo(models.Model):
     description = models.TextField()
     user_saved_date = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['author']
+
     def __str__(self):
         return f'photo by {self.author} saved by {self.user}'

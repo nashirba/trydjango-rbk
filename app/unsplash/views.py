@@ -2,6 +2,7 @@ import requests
 from django.shortcuts import render
 from django.conf import settings
 from .forms import SearchPhoto
+from .models import Photo
 
 
 BASE_URL = 'https://api.unsplash.com/'
@@ -75,9 +76,18 @@ def detail_view(request, id):
     context = {
         'response': response
     }
-    print(response)
     if request.method == 'POST': # save button
         if request.user.is_authenticated:
-            print(request.user)
-            print(response['user']['name'])
+            author = response['user']['name']
+            image = response['urls']['small']
+            if response['description']:
+                description = response['description']
+            else:
+                description = response['alt_description']
+            photo_data = {
+                'author': author,
+                'image': image,
+                'description': description
+            }
+            photo_object= Photo.objects.create(**photo_data)
     return render(request, 'detail.html', context)
