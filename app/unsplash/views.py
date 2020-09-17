@@ -42,6 +42,25 @@ def detail_photo_url(id_photo):
     return response
 
 
+def save_photo(response, request):
+    if request.user.is_authenticated:
+        author = response['user']['name']
+        image = response['urls']['small']
+        if response['description']:
+            description = response['description']
+        else:
+            description = response['alt_description']
+        photo_data = {
+            'author': author,
+            'image': image,
+            'description': description
+        }
+        photo_object= Photo.objects.create(**photo_data)
+        return messages.success(request, f'Photo is saved!')
+    else:
+        return messages.warning(request, f'You must be logged in to save!')
+
+
 def index_view(request):
     search_form = SearchPhoto()
     if request.method == 'GET':
@@ -78,19 +97,5 @@ def detail_view(request, id):
         'response': response
     }
     if request.method == 'POST': # save button
-        if request.user.is_authenticated:
-            author = response['user']['name']
-            image = response['urls']['small']
-            if response['description']:
-                description = response['description']
-            else:
-                description = response['alt_description']
-            photo_data = {
-                'author': author,
-                'image': image,
-                'description': description
-            }
-            photo_object= Photo.objects.create(**photo_data)
-        else:
-            messages.warning(request, f'You must be logged in to save!')
+        save_photo(response, request)
     return render(request, 'detail.html', context)

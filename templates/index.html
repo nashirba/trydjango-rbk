@@ -16,13 +16,37 @@
 
       {% for response_item in response %}
 
-        <div class="col-lg-3 col-md-4 col-6">
+        <!-- <div class="col-lg-3 col-md-4 col-6">
           Author : {{ response_item.user.name }}
           <a href="{% url 'detail' response_item.id %}" class="d-block mb-4 h-100">
             <img class="img-fluid img-thumbnail" src="{{ response_item.urls.small }}" alt="">
           </a>
         </div>
-        <hr class="mt-2 mb-5"> 
+        <div align='left'>
+          <form method='POST'> 
+            {% csrf_token %}
+            <input type="submit" value="Save!" class="btn btn-secondary btn-lg">
+          </form> 
+        </div>
+        <hr class="mt-2 mb-5">  -->
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card h-80">
+            <a href="{% url 'detail' response_item.id %}">
+              <img class="img-fluid img-thumbnail" src="{{ response_item.urls.small }}" alt="">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">by {{ response_item.user.name }}</h5>
+              <!-- <p class="card-text">{{ response_item.description }}</p> -->
+            </div>
+            <div class="card-footer" align='center'>
+              <form method='POST'> 
+                {% csrf_token %}
+                <input  type="submit" value="Save!" class="btn btn-primary">
+              </form> 
+            </div>
+          </div>
+        </div>
       
       {% endfor %}
 
