@@ -24,7 +24,11 @@
               <img class="img-fluid img-thumbnail" src="{{ response.urls.full }}" alt="">
             </a>
           </div>
-
+          <form method='POST'> 
+            {% csrf_token %}
+            
+            <input type="submit" value="Save!" class="btn btn-secondary btn-lg">
+          </form> 
         </div>
         <hr class="mt-2 mb-5">  
     </div>

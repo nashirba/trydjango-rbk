@@ -75,4 +75,9 @@ def detail_view(request, id):
     context = {
         'response': response
     }
+    print(response)
+    if request.method == 'POST': # save button
+        if request.user.is_authenticated:
+            print(request.user)
+            print(response['user']['name'])
     return render(request, 'detail.html', context)
