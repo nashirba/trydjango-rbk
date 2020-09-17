@@ -10,4 +10,4 @@ class Photo(models.Model):
     photo_unsplash_id = models.CharField(max_length=50)
 
     def __str__(self):
-        return f'photo by {self.author} saved by {self.user}'
+        return f'photo by {self.author}'
