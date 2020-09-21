@@ -1,7 +1,11 @@
 import requests
+
 from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import render
+from django.views.generic import DeleteView
+from django.urls import reverse_lazy
+
 from .forms import SearchPhoto
 from .models import Photo
 
@@ -106,3 +110,8 @@ def detail_view(request, id):
     if request.method == 'POST': # save button
         save_photo(response, request)
     return render(request, 'detail.html', context)
+
+
+class PhotoDeleteView(DeleteView):
+    model = Photo
+    success_url = reverse_lazy('profile')
