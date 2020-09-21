@@ -57,11 +57,13 @@ def save_photo(response, request):
             'description': description,
             'photo_unsplash_id': photo_unsplash_id
         }
+        if Photo.objects.filter(photo_unsplash_id=photo_unsplash_id).exists():
+            return messages.warning(request, 'photo already exists')
         photo_object= Photo.objects.create(**photo_data)
         photo_object.users.add(request.user)
-        return messages.success(request, f'Photo is saved!')
+        return messages.success(request, 'Photo is saved!')
     else:
-        return messages.warning(request, f'You must be logged in to save!')
+        return messages.warning(request, 'You must be logged in to save!')
 
 
 def index_view(request):

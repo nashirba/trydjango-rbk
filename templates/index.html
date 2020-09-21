@@ -25,10 +25,18 @@
               <h5 class="card-title">by {{ response_item.user.name }}</h5>
             </div>
             <div class="card-footer" align='center'>
-              <form action="{% url 'detail' response_item.id %}" method='POST'> 
-                {% csrf_token %}
-                <input  type="submit" value="Save!" class="btn btn-primary">
-              </form> 
+
+              {% if user.is_authenticated %}
+                <form action="{% url 'detail' response_item.id %}" method='POST'> 
+                  {% csrf_token %}
+                  <input  type="submit" value="Save!" class="btn btn-primary">
+                </form> 
+              {% else %}
+                <small class='text muted'>
+                  Login to save photo
+                </small>
+              {% endif %}
+
             </div>
           </div>
         </div>

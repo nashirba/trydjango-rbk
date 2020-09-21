@@ -23,18 +23,22 @@
               <img class="img-fluid img-thumbnail" src="{{ response.urls.full }}" alt="">
             </a>
           </div>
-
-          {% if messages %}
-            <button type="button" class="btn btn-secondary btn-lg">Saved</button>         
+          {% if user.is_authenticated %}
+            {% if messages %}
+              <button type="button" class="btn btn-secondary btn-lg">Saved</button>         
+            {% else %}
+              <form method='POST'> 
+                {% csrf_token %}
+                <input type="submit" value="Save" class="btn btn-primary btn-lg disabled">
+              </form> 
+            {% endif %}
           {% else %}
-            <form method='POST'> 
-              {% csrf_token %}
-              <input type="submit" value="Save" class="btn btn-primary btn-lg disabled">
-            </form> 
+            <h5 class='text muted'>
+              Login to save photo
+            </h5>
           {% endif %}
 
         </div>
-        <hr class="mt-2 mb-5">  
     </div>
 
 {% endblock content %}
