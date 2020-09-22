@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import UserRegisterForm
 from app.unsplash.models import Photo
@@ -21,7 +22,19 @@ def register(request):
 
 @login_required
 def profile(request):
-    context = {'photos': Photo.objects.filter(users=request.user)}
+    object_list = Photo.objects.filter(users=request.user)  
+    paginator = Paginator(object_list, 3)  # 3 фоток на каждой странице  
+    page = request.GET.get('page')  
+    try:  
+        photos = paginator.page(page)  
+    except PageNotAnInteger:  
+        # Если страница не является целым числом, поставим первую страницу  
+        photos = paginator.page(1)  
+    except EmptyPage:  
+        # Если страница больше максимальной, доставить последнюю страницу результатов  
+        photos = paginator.page(paginator.num_pages)  
+    context = {
+        'page': page,
+        'photos': photos,
+        }
     return render(request, 'users/profile.html', context)
-
-

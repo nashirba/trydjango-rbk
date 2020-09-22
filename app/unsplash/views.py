@@ -2,6 +2,7 @@ import requests
 
 from django.conf import settings
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from django.views.generic import DeleteView
 from django.urls import reverse_lazy
@@ -78,9 +79,21 @@ def index_view(request):
         response = response[photo_number]
         save_photo(response, request)
     response = get_photos_url()
+    object_list = response  
+    paginator = Paginator(object_list, 4)  # 4 фоток на каждой странице  
+    page = request.GET.get('page')  
+    try:  
+        response = paginator.page(page)  
+    except PageNotAnInteger:  
+        # Если страница не является целым числом, поставим первую страницу  
+        response = paginator.page(1)  
+    except EmptyPage:  
+        # Если страница больше максимальной, доставить последнюю страницу результатов  
+        response = paginator.page(Paginator.num_pages)  
     context = {
         'response': response,
-        'search_form': search_form
+        'search_form': search_form,
+        'page': page,
     }
     return render(request, 'index.html', context)
 
@@ -92,12 +105,24 @@ def search_view(request):
     else:
         search_form = ''
     response = get_photos_url()
-
     search_value = request.GET.get('query', None)
     response = search_photo_url(search_value)
+    object_list = response['results']
+    paginator = Paginator(object_list, 4)  # 4 фоток на каждой странице  
+    page = request.GET.get('page')  
+    try:  
+        response = paginator.page(page)  
+    except PageNotAnInteger:  
+        # Если страница не является целым числом, поставим первую страницу  
+        response = paginator.page(1)  
+    except EmptyPage:  
+        # Если страница больше максимальной, доставить последнюю страницу результатов  
+        response = paginator.page(paginator.num_pages)
     context = {
         'response': response,
-        'search_form': search_form
+        'search_form': search_form,
+        'page': page,
+        'search_value': search_value,
     }
     return render(request, 'search.html', context)
 
